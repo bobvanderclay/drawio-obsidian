@@ -45,6 +45,14 @@ export class DiagramEditView extends DiagramViewBase {
       );
       this.drawioClient.addCssToFrame(this.fontCss());
 
+      // Get theme css vars from parent app
+      const list = {};
+      const styles = document.documentElement.computedStyleMap();
+      styles.forEach((val, key) => {
+        if (key.startsWith('--')) list[key] = val.toString();
+      });
+      console.log(list);
+
       if(this.plugin.settings.cssSnippets){
         for(let i = 0; i < this.plugin.settings.cssSnippets.length; i++){
           const snippet = this.plugin.settings.cssSnippets[i];
